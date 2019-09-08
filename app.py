@@ -1,8 +1,12 @@
+# https://www.pythonforbeginners.com/
 import random
 
 # test
-text_file = open("/pokemon.txt")
-words = text_file
+f = open('pokemon.txt', 'r')
+words = f.readlines()
+f.close()
+# comment this line out if you use a words.txt file with each word on a new line
+words = words[0].split(' ')
 letters_correct = []
 letters_wrong = []
 guesses = 0
@@ -17,10 +21,10 @@ def get_word():
 def get_guess():
     for letter in word_letters:
         if (letter in letters_correct):
-            print("")
+            print(letter)
         else:
 
-            print("")
+            print("_")
 
     return input("Guess: ")
 
@@ -72,9 +76,11 @@ while True:
             print("    ‾")
             print("    ‾")
             print("-‾‾-_")
+
+        elif guesses == 6:
+            print("Looks like you need to go back to the trainer school...")
+            print("It was... " + words[word])
+            break
         else:
             print("The pokemon ran away...")
-
-if (len(letters_correct) == 7):
-    print("Looks like you need to go back to the trainer school...")
-    print("It was... " + words[word])
+            break
