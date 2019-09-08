@@ -1,7 +1,8 @@
 import random
 
 # test
-words = ['eevee', "pikachu", "entei", "abra"]
+text_file = open("/pokemon.txt")
+words = text_file
 letters_correct = []
 letters_wrong = []
 guesses = 0
