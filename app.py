@@ -5,8 +5,6 @@ words = ['eevee', "pikachu", "entei", "abra"]
 letters_correct = []
 letters_wrong = []
 guesses = 0
-word = get_word()
-wordletters = list(words[word])
 
 print("Who's that Pokemon?")
 
@@ -18,18 +16,22 @@ def get_word():
 def get_guess():
     for letter in word_letters:
         if (letter in letters_correct):
-            print(letter)
+            print("")
         else:
-            print("_")
 
-    return input("\n\nGuess: ")
+            print("")
 
+    return input("Guess: ")
+
+
+word = get_word()
+word_letters = list(words[word])
+print("This pokemon's name is " + str(len(words[word])) + " letters long.")
 
 while True:
     guess = get_guess()
     if(guess in words[word]):
         letters_correct.append(guess)
-        print("You got it!")
 
         if(len(letters_correct) == len(words[word])):
             print(" You got it!\n\n It's " + words[word] + "\n\n")
@@ -37,6 +39,7 @@ while True:
 
     else:
         letters_wrong.append(guess)
+        guesses += 1
         if guesses == 0:
 
             print("  !  ")
