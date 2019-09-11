@@ -2,6 +2,6 @@
 
 To play:
 
-> Pyhton3 app.py
-> guess a letter
-> after 6 guess you lose
+> \$ Pyhton3 app.py
+> guess/input a single letter
+> after 7 incorrect guess you lose

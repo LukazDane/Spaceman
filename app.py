@@ -1,17 +1,30 @@
 # https://www.pythonforbeginners.com/
+# https://stackoverflow.com/questions/22677853/python-import-text-file-as-list-to-iterate
+# https://www.stechies.com/python-print-without-newline/
+from collections import Counter
 import random
+# -----------------------------------
+# for pokemon Spaceman -------------
+# -----------------------------------
+# f = open('pokemon.txt', 'r')
+# words = f.readlines()
+# f.close()
+# print("Who's that Pokemon?")
+# -----------------------------------
 
-# test
-f = open('pokemon.txt', 'r')
+# for standard Spaceman
+# -----------------------------------
+f = open('words.txt', 'r')
 words = f.readlines()
 f.close()
+print("Can you guess this word?")
+# -----------------------------------
 # comment this line out if you use a words.txt file with each word on a new line
 words = words[0].split(' ')
 letters_correct = []
 letters_wrong = []
 guesses = 0
-
-print("Who's that Pokemon?")
+count_correct = 0
 
 
 def get_word():
@@ -21,31 +34,45 @@ def get_word():
 def get_guess():
     for letter in word_letters:
         if (letter in letters_correct):
-            print(letter)
+            print(letter, end="")
         else:
-
-            print("_")
-
-    return input("Guess: ")
+            print("_", end="")
+    return input("\n\nGuess: ").lower()
 
 
 word = get_word()
 word_letters = list(words[word])
+
 print("This pokemon's name is " + str(len(words[word])) + " letters long.")
+print("---" + (words[word]) + "---")  # displays word for testing, delete later
 
 while True:
     guess = get_guess()
-    if guess.isalpha():
-        if(guess in words[word]):
+    print("---" + (words[word]) + "---")
+    if guess.isalpha() and len(guess) < 2:
+        if(guess in letters_correct) or (guess in letters_wrong):
+            print("You already guessed " + guess + ". Try again...")
+            print(len(letters_correct))
+
+        elif (guess in words[word]):
             letters_correct.append(guess)
+            count_correct += 1
+            print("Correctly guessed: " + ", ".join(letters_correct))
+            print("Incorrectly guessed: " + ", ".join(letters_wrong))
+            print(str(guesses) + " of 7 lives lost!")
+            print(count_correct)
+            print(len(word_letters))
 
-            if(len(letters_correct) == len(words[word])):
-                print(" You got it!\n\n It's " + words[word] + "\n\n")
+            if count_correct == len(words[word]):
+                print(" You got it!\n It's " + words[word] + "\n")
                 break
-
         else:
             letters_wrong.append(guess)
+            print("Correctly guessed: " + ", ".join(letters_correct))
+            print("Incorrectly guessed: " + ", ".join(letters_wrong))
             guesses += 1
+            # print(*letters_wrong, sep=", ")
+            print(str(guesses) + " of 7 lives lost!")
             if guesses == 0:
 
                 print("  !  ")
@@ -79,11 +106,14 @@ while True:
                 print("-‾‾-_")
 
             elif guesses == 6:
+                print("The pokemon is running away... Last Chance!")
+
+            else:
                 print("Looks like you need to go back to the trainer school...")
                 print("It was... " + words[word])
                 break
-            else:
-                print("The pokemon ran away...")
-                break
+
     else:
-        print("There's a time and place for everything. Please type a letter...")
+        if guess is not guess.isalpha():
+            print("There's a time and place for everything. Please type a letter...")
+            pass
