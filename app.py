@@ -53,7 +53,7 @@ print("This word is " + str(len(words[word])) + " letters long.")
 
 while True:
     guess = get_guess()
-    # print("---" + (words[word]) + "---")
+    print("---" + (words[word]) + "---")
     if guess.isalpha() and len(guess) < 2:
         if(guess in letters_correct) or (guess in letters_wrong):
             print("You already guessed " + guess + ". Try again...")
@@ -79,7 +79,7 @@ while True:
                 \:.             .:/
                  \``._________.''/ 
                   \             / 
-          .--.--, / .':.   .':. \
+          .--.--, / .':.   .':. \//
          /__:  /  | '::' . '::' |
             / /   |`.   ._.   .'|
            / /    |.'         '.|
