@@ -35,6 +35,7 @@ def get_guess():
     for letter in word_letters:
         if (letter in letters_correct):
             print(letter, end="")
+
         else:
             print("_", end="")
     return input("\n\nGuess: ").lower()
@@ -42,7 +43,6 @@ def get_guess():
 
 word = get_word()
 word_letters = list(words[word])
-
 print("This pokemon's name is " + str(len(words[word])) + " letters long.")
 print("---" + (words[word]) + "---")  # displays word for testing, delete later
 
@@ -56,7 +56,12 @@ while True:
 
         elif (guess in words[word]):
             letters_correct.append(guess)
-            count_correct += 1
+            # global count_correct
+            count_correct = 0
+            for i in word_letters:
+                if i in letters_correct:
+                    count_correct += 1
+
             print("Correctly guessed: " + ", ".join(letters_correct))
             print("Incorrectly guessed: " + ", ".join(letters_wrong))
             print(str(guesses) + " of 7 lives lost!")
